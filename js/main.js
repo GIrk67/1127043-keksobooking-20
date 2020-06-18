@@ -1,6 +1,6 @@
 'use strict';
 
-var AVATAR = [
+var AVATARS = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
   'img/avatars/user03.png',
@@ -18,19 +18,19 @@ var TITLES = [
   'Уютное бунгало',
 ];
 
-// var ADDRESS = [];
+// var ADDRESSES = [];
 
-var PRICE = [10000, 50000];
+var PRICES = [10000, 50000];
 
-var TYPE = ['palace', 'flat', 'house', 'bungalo'];
+var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 
 var ROOMS = [1, 2, 3];
 
 var GUESTS = [1, 2, 3, 0];
 
-var CHECKIN = ['12:00', '13:00', '14:00'];
+var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 
-var CHECKOUT = ['12:00', '13:00', '14:00'];
+var CHECKOUT_HOURS = ['12:00', '13:00', '14:00'];
 
 var FEATURES = [
   'wifi',
@@ -47,7 +47,7 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
-var LOCATION = {
+var LOCATIONS = {
   x: getRandomIntElement(130, 1130),
   y: getRandomIntElement(130, 630),
 };
@@ -81,20 +81,20 @@ var getInformArrow = function (number) {
     var informarrow = [
       {
         author: {
-          avatar: getRandomArrElement(AVATAR),
+          avatar: getRandomArrElement(AVATARS),
         },
         offer: {
           title: getRandomArrElement(TITLES),
-          price: getRandomArrElement(PRICE),
-          type: getRandomArrElement(TYPE),
+          price: getRandomArrElement(PRICES),
+          type: getRandomArrElement(TYPES),
           rooms: getRandomArrElement(ROOMS),
           guests: getRandomArrElement(GUESTS),
-          checkin: getRandomArrElement(CHECKIN),
-          checkout: getRandomArrElement(CHECKOUT),
+          checkin: getRandomArrElement(CHECKIN_HOURS),
+          checkout: getRandomArrElement(CHECKOUT_HOURS),
           features: getRandomArrElement(FEATURES),
           photos: getRandomArrElement(PHOTOS),
         },
-        location: getRandomArrElement(LOCATION),
+        location: getRandomArrElement(LOCATIONS),
       },
     ];
   }
