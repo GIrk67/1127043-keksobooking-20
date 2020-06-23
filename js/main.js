@@ -168,8 +168,8 @@ var renderCardElement = function (informArrow) {
 };
 
 var card = document.createDocumentFragment();
-for (var i = 0; i < informs.length; i++) {
+for (i = 0; i < informs.length; i++) {
   card.appendChild(renderCardElement(informs[i]));
-};
+}
 
 mapElement.insertBefore(card, mapFiltersContainer);
