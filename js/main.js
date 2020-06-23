@@ -48,11 +48,12 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
-
+/*
 var LOCATIONS = {
   x: getRandomIntElement(130, 1130),
   y: getRandomIntElement(130, 630),
 };
+*/
 
 var mapElement = document.querySelector('.map');
 mapElement.classList.remove('map--faded');
@@ -169,6 +170,6 @@ var renderCardElement = function (informArrow) {
 var card = document.createDocumentFragment();
 for (var i = 0; i < informs.length; i++) {
   card.appendChild(renderCardElement(informs[i]));
-}
+};
 
 mapElement.insertBefore(card, mapFiltersContainer);
