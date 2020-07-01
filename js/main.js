@@ -77,6 +77,17 @@ function getRandomIntElement(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+// Функция создания массива случайной длины
+
+var getRandomArrLength = function (arr) {
+  var newArray = [];
+  var newLength = getRandomIntElement(arr.length, 0);
+  for (var i = 0; i < newLength; i++) {
+    newArray.push(arr[i]);
+  }
+  return newArray[i];
+};
+
 // Создание массива объектов
 
 var getInformArrows = function (number) {
@@ -94,8 +105,8 @@ var getInformArrows = function (number) {
         guests: getRandomArrElement(GUESTS),
         checkin: getRandomArrElement(CHECKIN_HOURS),
         checkout: getRandomArrElement(CHECKOUT_HOURS),
-        features: getRandomArrElement(FEATURES),
-        photos: getRandomArrElement(PHOTOS),
+        features: getRandomArrLength(FEATURES),
+        photos: getRandomArrLength(PHOTOS),
       },
       location: {
         x: getRandomIntElement(130, 1130),
@@ -137,10 +148,33 @@ var TYPES_HOUSES = {
   bungalo: 'Бунгало',
 };
 
+var FEATURES_LIST = {
+  wifi: 'WI-FI',
+  dishwasher: 'Посудомоечная машина',
+  parking: 'Парковка',
+  washer: 'Душ',
+  elevator: 'Лифт',
+  conditioner: 'Кондиционер',
+};
+
 var similarCard = document
   .querySelector('#card')
   .content.querySelector('.map__card');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
+
+var renderPhoto = function (photos, item) {
+  var photosElement = item.querySelector('.popup__photos');
+  if (photos.length > 0) {
+    item.querySelector('.popup__photo').src = photos[0];
+    for (var i = 1; i < photos.length; i++) {
+      var photoItem = similarCard.querySelector('.popup__photo').cloneNode(true);
+      photoItem.src = photos[i];
+      itemquerySelector('.popup__photos').appendChild(photoItem);
+    }
+  } else {
+    photosElement.remove();
+  };
+}
 
 var renderCardElement = function (informArrow) {
   var cardElement = similarCard.cloneNode(true);
@@ -161,9 +195,9 @@ var renderCardElement = function (informArrow) {
     ', выезд до ' +
     informArrow.offer.checkout;
   cardElement.querySelector('.popup__features').textContent =
-    informArrow.offer.features;
+    FEATURES_LIST[informArrow.offer.features];
   cardElement.querySelector('.popup__avatar').src = informArrow.author.avatar;
-  cardElement.querySelector('.popup__photos').src = informArrow.offer.photos;
+  renderPhoto(informArrow.offer.photos, cardElement);
   return cardElement;
 };
 
