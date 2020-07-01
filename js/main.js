@@ -166,15 +166,15 @@ var renderPhoto = function (photos, item) {
   var photosElement = item.querySelector('.popup__photos');
   if (photos.length > 0) {
     item.querySelector('.popup__photo').src = photos[0];
-    for (var i = 1; i < photos.length; i++) {
+    for (i = 1; i < photos.length; i++) {
       var photoItem = similarCard.querySelector('.popup__photo').cloneNode(true);
       photoItem.src = photos[i];
-      itemquerySelector('.popup__photos').appendChild(photoItem);
+      item.querySelector('.popup__photos').appendChild(photoItem);
     }
   } else {
     photosElement.remove();
-  };
-}
+  }
+};
 
 var renderCardElement = function (informArrow) {
   var cardElement = similarCard.cloneNode(true);
