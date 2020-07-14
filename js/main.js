@@ -180,7 +180,7 @@ var renderFeatures = function (features, item) {
       FeatureItem.classList.add('popup__feature');
       FeatureItem.classList.add('popup__feature--' + features[j]);
       featuresList.appendChild(FeatureItem);
-    };
+    }
   } else {
     featuresList.remove();
   }
@@ -192,7 +192,7 @@ var renderPhoto = function (photos, item) {
   if (photos.length > 0) {
     for (var j = 0; j < photos.length; j++) {
       var photoItem = document.createElement('img');
-      photoItem.classList.add('popup__photo')
+      photoItem.classList.add('popup__photo');
       photoItem.src = photos[j];
       photoItem.alt = 'Фотография жилья';
       photoItem.width = 45;
@@ -245,14 +245,14 @@ var setMainPinCenter = function () {
 
 var setMainPinPoint = function () {
   var locationX = Math.round(MAP_PIN_WIDTH / 2 + END_PIN_WIDTH / 2 + mainPin.offsetLeft);
-  var locationY = Math.round(MAIN_PIN_HEIGHT / 2 + END_PIN_HEIGHT + mainPin.offsetTop);
+  var locationY = Math.round(MAP_PIN_HEIGHT / 2 + END_PIN_HEIGHT + mainPin.offsetTop);
   inputAddress.value = locationX + ', ' + locationY;
 };
 
 // Блокировка форм и фильтров
 
 var formElement = document.querySelectorAll('fieldset');
-var selectElement = document.querySelector('.map__filters')
+var selectElement = document.querySelector('.map__filters');
 
 var disabledElement = function (element) {
   element.setAttribute('disabled', 'true');
@@ -294,12 +294,12 @@ var activatedPage = function () {
 mainPin.addEventListener('mousedown', function (evt) {
   if (evt.button === 0) {
     activatedPage();
-  };
+  }
 });
 mainPin.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     activatedPage();
-  };
+  }
 });
 
 // Проверка соответствия гостей и комнат
