@@ -1,6 +1,12 @@
 'use strict';
 
 var NUMBER_OBJECTS = 8;
+var MAIN_PIN_WIDTH = 200;
+var MAIN_PIN_HEIGHT = 200;
+var MAP_PIN_WIDTH = 65;
+var MAP_PIN_HEIGHT = 65;
+var END_PIN_WIDTH = 10;
+var END_PIN_HEIGHT = 22;
 
 var AVATARS = [
   'img/avatars/user01.png',
@@ -28,7 +34,7 @@ var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 
 var ROOMS = [1, 2, 3];
 
-var GUESTS = [1, 2, 3, 0];
+var GUESTS = [1, 2, 3, 100];
 
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 
@@ -56,12 +62,13 @@ var LOCATIONS = {
 */
 
 var mapElement = document.querySelector('.map');
-mapElement.classList.remove('map--faded');
-
 var mapPin = document.querySelector('.map__pins');
 var similarMapPin = document
   .querySelector('#pin')
   .content.querySelector('.map__pin');
+var mainPin = document.querySelector('.map__pin--main');
+var noticeForm = document.querySelector('.ad-form');
+var inputAddress = document.querySelector('#address');
 
 //  Функция случайного выбора из массива
 
@@ -137,7 +144,6 @@ var pinElement = document.createDocumentFragment();
 for (var i = 0; i < informs.length; i++) {
   pinElement.appendChild(renderMapPin(informs[i]));
 }
-mapPin.appendChild(pinElement);
 
 // module3-task3
 
@@ -148,6 +154,7 @@ var TYPES_HOUSES = {
   bungalo: 'Бунгало',
 };
 
+/*
 var FEATURES_LIST = {
   wifi: 'WI-FI',
   dishwasher: 'Посудомоечная машина',
@@ -157,38 +164,40 @@ var FEATURES_LIST = {
   conditioner: 'Кондиционер',
 };
 
+*/
+
 var similarCard = document
   .querySelector('#card')
   .content.querySelector('.map__card');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-/*
-var renderFeatures = function (features) {
-  var featuresElement = document.createDocumentFragment();
-  var featuresList = document.createElement('ul');
-  featuresList.classList.add('popup__features');
-  featuresElement.appendChild(featuresList);
-  features.forEach(function (feature) {
-    var FeatureItem = document.createElement('li');
-    FeatureItem.classList.add('popup__feature popup__feature--' + feature);
-    featuresItem.appendChild(FeatureItem);
-  });
-  return featuresElement;
+var renderFeatures = function (features, item) {
+  var featuresList = item.querySelector('.popup__features');
+  featuresList.innerHTML = '';
+  if (features.length > 0) {
+    for (var j = 0; j < features.length; j++) {
+      var FeatureItem = document.createElement('li');
+      FeatureItem.classList.add('popup__feature');
+      FeatureItem.classList.add('popup__feature--' + features[j]);
+      featuresList.appendChild(FeatureItem);
+    };
+  } else {
+    featuresList.remove();
+  }
 };
-*/
 
 var renderPhoto = function (photos, item) {
   var photosElement = item.querySelector('.popup__photos');
+  photosElement.innerHTML = '';
   if (photos.length > 0) {
-    item.querySelector('.popup__photo').src = photos[0];
-    for (var j = 1; j < photos.length; j++) {
-      var photoItem = similarCard
-        .querySelector('.popup__photo')
-        .cloneNode(true);
-      photoItem.src = photos[i];
+    for (var j = 0; j < photos.length; j++) {
+      var photoItem = document.createElement('img');
+      photoItem.classList.add('popup__photo')
+      photoItem.src = photos[j];
+      photoItem.alt = 'Фотография жилья';
       photoItem.width = 45;
       photoItem.height = 40;
-      item.querySelector('.popup__photos').appendChild(photoItem);
+      photosElement.appendChild(photoItem);
     }
   } else {
     photosElement.remove();
@@ -214,7 +223,7 @@ var renderCardElement = function (informArrow) {
     ', выезд до ' +
     informArrow.offer.checkout;
   cardElement.querySelector('.popup__avatar').src = informArrow.author.avatar;
-  //renderFeatures(FEATURES_LIST[informArrow.offer.features], cardElement);
+  renderFeatures(informArrow.offer.features, cardElement);
   renderPhoto(informArrow.offer.photos, cardElement);
   return cardElement;
 };
@@ -224,4 +233,87 @@ for (i = 0; i < informs.length; i++) {
   card.appendChild(renderCardElement(informs[i]));
 }
 
-mapElement.insertBefore(card, mapFiltersContainer);
+// Координаты центра метки
+
+var setMainPinCenter = function () {
+  var locationX = Math.round(MAIN_PIN_WIDTH / 2 + mainPin.offsetLeft);
+  var locationY = Math.round(MAIN_PIN_HEIGHT / 2 + mainPin.offsetTop);
+  inputAddress.value = locationX + ', ' + locationY;
+};
+
+// Координаты острия метки
+
+var setMainPinPoint = function () {
+  var locationX = Math.round(MAP_PIN_WIDTH / 2 + END_PIN_WIDTH / 2 + mainPin.offsetLeft);
+  var locationY = Math.round(MAIN_PIN_HEIGHT / 2 + END_PIN_HEIGHT + mainPin.offsetTop);
+  inputAddress.value = locationX + ', ' + locationY;
+};
+
+// Блокировка форм и фильтров
+
+var formElement = document.querySelectorAll('fieldset');
+var selectElement = document.querySelector('.map__filters')
+
+var disabledElement = function (element) {
+  element.setAttribute('disabled', 'true');
+};
+
+var disabledFormElement = function (formelements) {
+  for (var i = 0; i < formelements.length; i++) {
+    disabledElement(formelements[i]);
+  }
+  return formelements;
+};
+
+// Разблокировка форм
+
+var activatedForm = function (formelements) {
+  for (var i = 0; i < formelements.length; i++) {
+    formelements[i].removeAttribute('disabled');
+  }
+};
+
+// Старт
+
+disabledFormElement(formElement);
+disabledFormElement(selectElement);
+setMainPinCenter();
+
+// Активация страницы
+
+var activatedPage = function () {
+  mapElement.classList.remove('map--faded');
+  noticeForm.classList.remove('ad-form--disabled');
+  mapPin.appendChild(pinElement);
+  activatedForm(formElement);
+  activatedForm(selectElement);
+  setMainPinPoint();
+  mapElement.insertBefore(card, mapFiltersContainer);
+};
+
+mainPin.addEventListener('mousedown', function (evt) {
+  if (evt.button === 0) {
+    activatedPage();
+  };
+});
+mainPin.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    activatedPage();
+  };
+});
+
+// Проверка соответствия гостей и комнат
+
+var selectNumberRooms = document.querySelector('#room_number');
+var selectCapacity = document.querySelector('#capacity');
+
+var сapacityChange = function () {
+  selectNumberRooms.setCustomValidity('');
+  if ((selectNumberRooms.value === '100') && (selectCapacity.value !== '0')) {
+    selectNumberRooms.setCustomValidity('100 комнат не для гостей');
+  } else if (selectNumberRooms.value < selectCapacity.value) {
+    selectNumberRooms.setCustomValidity('Число гостей не должно превышать количество комнат');
+  }
+};
+
+selectNumberRooms.addEventListener('change', сapacityChange);
