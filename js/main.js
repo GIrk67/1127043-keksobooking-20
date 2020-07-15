@@ -302,18 +302,35 @@ mainPin.addEventListener('keydown', function (evt) {
   }
 });
 
-// Проверка соответствия гостей и комнат
+// Валидация формы добавления нового объявления
 
 var selectNumberRooms = document.querySelector('#room_number');
 var selectCapacity = document.querySelector('#capacity');
+var selectTitle = document.querySelector('#title');
+var selectType = document.querySelector('#type');
+var selectPrice = document.querySelector('#price');
+var selectTimeIn = document.querySelector('#timein');
+var selectTimeOut = document.querySelector('#timeout');
+var selectFile = document.querySelector('#file');
 
-var сapacityChange = function () {
-  selectNumberRooms.setCustomValidity('');
+selectTitle.addEventListener('invalid', function () {
+  if (selectTitle.validity.tooShort) {
+    selectTitle.setCustomValidity('Минимальная длина — 30 символов');
+  } else if (selectTitle.validity.tooLong) {
+    selectTitle.setCustomValidity('Максимальная длина — 100 символов');
+  } else if (selectTitle.validity.valueMissing) {
+    selectTitle.setCustomValidity('Обязательное поле');
+  } else {
+    selectTitle.setCustomValidity('');
+  }
+});
+
+selectNumberRooms.addEventListener('change', function () {
   if ((selectNumberRooms.value === '100') && (selectCapacity.value !== '0')) {
     selectNumberRooms.setCustomValidity('100 комнат не для гостей');
   } else if (selectNumberRooms.value < selectCapacity.value) {
     selectNumberRooms.setCustomValidity('Число гостей не должно превышать количество комнат');
+  } else {
+    selectNumberRooms.setCustomValidity('');
   }
-};
-
-selectNumberRooms.addEventListener('change', сapacityChange);
+});
