@@ -141,8 +141,8 @@ var renderMapPin = function (informArrow) {
 var informs = getInformArrows(NUMBER_OBJECTS);
 
 var pinElement = document.createDocumentFragment();
-for (var i = 0; i < informs.length; i++) {
-  pinElement.appendChild(renderMapPin(informs[i]));
+for (var n = 0; n < informs.length; n++) {
+  pinElement.appendChild(renderMapPin(informs[n]));
 }
 
 // module3-task3
@@ -216,11 +216,12 @@ var renderCardElement = function (informArrow) {
   return cardElement;
 };
 
-var renderCards = function() {
+var renderCards = function () {
   var card = document.createDocumentFragment();
   for (var i = 0; i < informs.length; i++) {
     card.appendChild(renderCardElement(informs[i]));
   }
+  return card;
 };
 
 renderCards();
@@ -280,8 +281,7 @@ var activatedPage = function () {
   activatedForm(formElement);
   activatedForm(selectElement);
   setMainPinPoint();
-  renderCards();
-  mapElement.insertBefore(card, mapFiltersContainer);
+  mapElement.insertBefore(renderCards(), mapFiltersContainer);
 };
 
 mainPin.addEventListener('mousedown', function (evt) {
@@ -303,10 +303,10 @@ var MAX_NAME_LENGTH = 100;
 var selectNumberRooms = document.querySelector('#room_number');
 var selectCapacity = document.querySelector('#capacity');
 var selectTitle = document.querySelector('#title');
-var selectType = document.querySelector('#type');
-var selectPrice = document.querySelector('#price');
-var selectTimeIn = document.querySelector('#timein');
-var selectTimeOut = document.querySelector('#timeout');
+//var selectType = document.querySelector('#type');
+//var selectPrice = document.querySelector('#price');
+//var selectTimeIn = document.querySelector('#timein');
+//var selectTimeOut = document.querySelector('#timeout');
 
 selectTitle.addEventListener('invalid', function () {
  if (selectTitle.validity.valueMissing) {
@@ -320,9 +320,9 @@ selectTitle.addEventListener('input', function () {
   var valueLength = selectTitle.value.length;
 
   if (valueLength < MIN_NAME_LENGTH) {
-    selectTitle.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) +' симв.');
+    selectTitle.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
   } else if (valueLength > MAX_NAME_LENGTH) {
-    selectTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) +' симв.');
+    selectTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
   } else {
     selectTitle.setCustomValidity('');
   }
