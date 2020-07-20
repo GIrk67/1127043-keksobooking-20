@@ -303,13 +303,13 @@ var MAX_NAME_LENGTH = 100;
 var selectNumberRooms = document.querySelector('#room_number');
 var selectCapacity = document.querySelector('#capacity');
 var selectTitle = document.querySelector('#title');
-//var selectType = document.querySelector('#type');
-//var selectPrice = document.querySelector('#price');
-//var selectTimeIn = document.querySelector('#timein');
-//var selectTimeOut = document.querySelector('#timeout');
+// var selectType = document.querySelector('#type');
+// var selectPrice = document.querySelector('#price');
+// var selectTimeIn = document.querySelector('#timein');
+// var selectTimeOut = document.querySelector('#timeout');
 
 selectTitle.addEventListener('invalid', function () {
- if (selectTitle.validity.valueMissing) {
+  if (selectTitle.validity.valueMissing) {
     selectTitle.setCustomValidity('Обязательное поле');
   } else {
     selectTitle.setCustomValidity('');
