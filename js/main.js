@@ -32,9 +32,9 @@ var PRICES = [10000, 50000];
 
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 
-var ROOMS = [1, 2, 3];
+var ROOMS = [1, 2, 3, 100];
 
-var GUESTS = [1, 2, 3, 100];
+var GUESTS = [1, 2, 3, 0];
 
 var CHECKIN_HOURS = ['12:00', '13:00', '14:00'];
 
@@ -154,18 +154,6 @@ var TYPES_HOUSES = {
   bungalo: 'Бунгало',
 };
 
-/*
-var FEATURES_LIST = {
-  wifi: 'WI-FI',
-  dishwasher: 'Посудомоечная машина',
-  parking: 'Парковка',
-  washer: 'Душ',
-  elevator: 'Лифт',
-  conditioner: 'Кондиционер',
-};
-
-*/
-
 var similarCard = document
   .querySelector('#card')
   .content.querySelector('.map__card');
@@ -228,10 +216,14 @@ var renderCardElement = function (informArrow) {
   return cardElement;
 };
 
-var card = document.createDocumentFragment();
-for (var i = 0; i < informs.length; i++) {
-  card.appendChild(renderCardElement(informs[i]));
-}
+var renderCards = function() {
+  var card = document.createDocumentFragment();
+  for (var i = 0; i < informs.length; i++) {
+    card.appendChild(renderCardElement(informs[i]));
+  }
+};
+
+renderCards();
 
 // Координаты центра метки
 
@@ -288,6 +280,7 @@ var activatedPage = function () {
   activatedForm(formElement);
   activatedForm(selectElement);
   setMainPinPoint();
+  renderCards();
   mapElement.insertBefore(card, mapFiltersContainer);
 };
 
@@ -304,6 +297,9 @@ mainPin.addEventListener('keydown', function (evt) {
 
 // Валидация формы добавления нового объявления
 
+var MIN_NAME_LENGTH = 30;
+var MAX_NAME_LENGTH = 100;
+
 var selectNumberRooms = document.querySelector('#room_number');
 var selectCapacity = document.querySelector('#capacity');
 var selectTitle = document.querySelector('#title');
@@ -311,26 +307,40 @@ var selectType = document.querySelector('#type');
 var selectPrice = document.querySelector('#price');
 var selectTimeIn = document.querySelector('#timein');
 var selectTimeOut = document.querySelector('#timeout');
-var selectFile = document.querySelector('#file');
 
 selectTitle.addEventListener('invalid', function () {
-  if (selectTitle.validity.tooShort) {
-    selectTitle.setCustomValidity('Минимальная длина — 30 символов');
-  } else if (selectTitle.validity.tooLong) {
-    selectTitle.setCustomValidity('Максимальная длина — 100 символов');
-  } else if (selectTitle.validity.valueMissing) {
+ if (selectTitle.validity.valueMissing) {
     selectTitle.setCustomValidity('Обязательное поле');
   } else {
     selectTitle.setCustomValidity('');
   }
 });
 
-selectNumberRooms.addEventListener('change', function () {
-  if ((selectNumberRooms.value === '100') && (selectCapacity.value !== '0')) {
+selectTitle.addEventListener('input', function () {
+  var valueLength = selectTitle.value.length;
+
+  if (valueLength < MIN_NAME_LENGTH) {
+    selectTitle.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) +' симв.');
+  } else if (valueLength > MAX_NAME_LENGTH) {
+    selectTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) +' симв.');
+  } else {
+    selectTitle.setCustomValidity('');
+  }
+});
+
+var roomValidation = function () {
+  if (selectNumberRooms.value === '100' && selectCapacity.value !== '0') {
     selectNumberRooms.setCustomValidity('100 комнат не для гостей');
-  } else if (selectNumberRooms.value < selectCapacity.value) {
+  } else if (selectNumberRooms.value < selectCapacity.value && selectCapacity.value !== '0') {
     selectNumberRooms.setCustomValidity('Число гостей не должно превышать количество комнат');
+  } else if (selectNumberRooms.value !== '100' && selectCapacity.value === '0') {
+    selectNumberRooms.setCustomValidity('Не для гостей только 100 комнат');
   } else {
     selectNumberRooms.setCustomValidity('');
   }
-});
+};
+
+selectNumberRooms.addEventListener('change', roomValidation);
+selectCapacity.addEventListener('change', roomValidation);
+
+
