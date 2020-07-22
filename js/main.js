@@ -403,5 +403,5 @@ for (var i = 0; i < buttonOpenCard.length; i++) {
     if (evt.button === 0) {
       openCard();
     }
-  })
-};
+  });
+}
