@@ -217,7 +217,7 @@ var renderCardElement = function (informArrow) {
   // Закрытие карточки
 
   var closeCard = function () {
-  cardElement.remove();
+    cardElement.remove();
   };
 
   var buttonCloseCard = cardElement.querySelector('.popup__close');
@@ -230,8 +230,8 @@ var renderCardElement = function (informArrow) {
 
   document.addEventListener('keydown', function (evt) {
     if (evt.key === 'Escape') {
-    evt.preventDefault();
-    closeCard();
+      evt.preventDefault();
+      closeCard();
     }
   });
 
@@ -367,11 +367,11 @@ selectCapacity.addEventListener('change', roomValidation);
 
 var checkTimecIn = function () {
   selectTimeOut.value = selectTimeIn.value;
-}
+};
 
 var checkTimeOut = function () {
   selectTimeIn.value = selectTimeOut.value;
-}
+};
 
 selectTimeIn.addEventListener('change', checkTimecIn);
 selectTimeOut.addEventListener('change', checkTimeOut);
@@ -386,28 +386,22 @@ var minPrice = {
 var typeChange = function (evt) {
   selectPrice.min = minPrice[evt.target.value];
   selectPrice.placeholder = minPrice[evt.target.value];
-}
+};
 
 selectType.addEventListener('change', typeChange);
 
 // Открытие карточки жилья
 
 var openCard = function () {
-    mapElement.insertBefore(renderCards(), mapFiltersContainer);
+  mapElement.insertBefore(renderCards(), mapFiltersContainer);
 };
 
 var buttonOpenCard = pinElement.querySelectorAll('.map__pin');
 
 for (var i = 0; i < buttonOpenCard.length; i++) {
   buttonOpenCard[i].addEventListener('mousedown', function (evt) {
-  if (evt.button === 0)
-    openCard();
-});
+    if (evt.button === 0) {
+      openCard();
+    }
+  })
 };
-
-
-
-
-
-
-
