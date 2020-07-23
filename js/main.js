@@ -1,30 +1,36 @@
 'use strict';
 
-//  Функция случайного выбора из массива
+(function () {
 
-var getRandomArrElement = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
+  //  Функция случайного выбора из массива
 
-  return arr[rand];
-};
+  var getRandomArrElement = function (arr) {
+    var rand = Math.floor(Math.random() * arr.length);
 
-// Функция случайного выбора из диапазона
+    return arr[rand];
+  };
 
-function getRandomIntElement(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+  // Функция случайного выбора из диапазона
 
-// Функция создания массива случайной длины
-
-var getRandomArrLength = function (arr) {
-  var newArray = [];
-  var newLength = getRandomIntElement(0, arr.length);
-  for (var i = 0; i <= newLength; i++) {
-    newArray.push(arr[i]);
+  function getRandomIntElement(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
   }
-  return newArray;
-};
 
+  // Функция создания массива случайной длины
 
+  var getRandomArrLength = function (arr) {
+    var newArray = [];
+    var newLength = getRandomIntElement(0, arr.length);
+    for (var i = 0; i <= newLength; i++) {
+      newArray.push(arr[i]);
+    }
+    return newArray;
+  };
 
+  window.main = {
+    getRandomArrElement: getRandomArrElement,
+    getRandomIntElement: getRandomIntElement,
+    getRandomArrLength: getRandomArrLength
+  }
 
+})();
