@@ -31,6 +31,6 @@
     getRandomArrElement: getRandomArrElement,
     getRandomIntElement: getRandomIntElement,
     getRandomArrLength: getRandomArrLength
-  }
+  };
 
 })();

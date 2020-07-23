@@ -55,7 +55,7 @@
     for (var i = 0; i < number; i++) {
       informArrows.push({
         author: {
-          avatar: getRandomArrElement(AVATARS),
+          avatar: window.main.getRandomArrElement(AVATARS),
         },
         offer: {
           title: window.main.getRandomArrElement(TITLES),

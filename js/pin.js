@@ -31,5 +31,6 @@
   window.pin = {
     informs: informs,
     pinElement: pinElement
-  }
+  };
+
 })();
