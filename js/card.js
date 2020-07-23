@@ -108,9 +108,8 @@
     buttonOpenCard[i].addEventListener('click', function (evt) {
       evt.currentTarget.classList.add('map__pin--active');
       var currentPin = document.querySelector('.map__pin--active');
-      console.log(currentPin);
       window.map.mapElement.insertBefore(renderCards(currentPin), mapFiltersContainer);
     });
-  };
+  }
 
 })();

@@ -50,34 +50,34 @@
 
   // Создание массива объектов
 
-var getInformArrows = function (number) {
-  var informArrows = [];
-  for (var i = 0; i < number; i++) {
-    informArrows.push({
-      author: {
-        avatar: getRandomArrElement(AVATARS),
-      },
-      offer: {
-        title: getRandomArrElement(TITLES),
-        price: getRandomArrElement(PRICES),
-        type: getRandomArrElement(TYPES),
-        rooms: getRandomArrElement(ROOMS),
-        guests: getRandomArrElement(GUESTS),
-        checkin: getRandomArrElement(CHECKIN_HOURS),
-        checkout: getRandomArrElement(CHECKOUT_HOURS),
-        features: getRandomArrLength(FEATURES),
-        photos: getRandomArrLength(PHOTOS),
-      },
-      location: {
-        x: getRandomIntElement(130, 1130),
-        y: getRandomIntElement(130, 630),
-      },
-    });
-  }
-  return informArrows;
-};
+  var getInformArrows = function (number) {
+    var informArrows = [];
+    for (var i = 0; i < number; i++) {
+      informArrows.push({
+        author: {
+          avatar: getRandomArrElement(AVATARS),
+        },
+        offer: {
+          title: getRandomArrElement(TITLES),
+          price: getRandomArrElement(PRICES),
+          type: getRandomArrElement(TYPES),
+          rooms: getRandomArrElement(ROOMS),
+          guests: getRandomArrElement(GUESTS),
+          checkin: getRandomArrElement(CHECKIN_HOURS),
+          checkout: getRandomArrElement(CHECKOUT_HOURS),
+          features: getRandomArrLength(FEATURES),
+          photos: getRandomArrLength(PHOTOS),
+        },
+        location: {
+          x: getRandomIntElement(130, 1130),
+          y: getRandomIntElement(130, 630),
+        },
+      });
+    }
+    return informArrows;
+  };
 
-window.data = {
-  getInformArrows: getInformArrows
-};
+  window.data = {
+    getInformArrows: getInformArrows
+  };
 })();
