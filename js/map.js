@@ -36,20 +36,20 @@
   var formElement = document.querySelectorAll('fieldset');
   var selectElement = document.querySelector('.map__filters');
 
-  var disabledElement = function (element) {
+  var disableElement = function (element) {
     element.setAttribute('disabled', 'true');
   };
 
-  var disabledFormElement = function (formelements) {
+  var disableFormElement = function (formelements) {
     for (var i = 0; i < formelements.length; i++) {
-      disabledElement(formelements[i]);
+      disableElement(formelements[i]);
     }
     return formelements;
   };
 
   // Разблокировка форм
 
-  var activatedForm = function (formelements) {
+  var activateForm = function (formelements) {
     for (var i = 0; i < formelements.length; i++) {
       formelements[i].removeAttribute('disabled');
     }
@@ -57,29 +57,29 @@
 
   // Старт
 
-  disabledFormElement(formElement);
-  disabledFormElement(selectElement);
+  disableFormElement(formElement);
+  disableFormElement(selectElement);
   setMainPinCenter();
 
   // Активация страницы
 
-  var activatedPage = function () {
+  var activatePage = function () {
     mapElement.classList.remove('map--faded');
     noticeForm.classList.remove('ad-form--disabled');
     mapPin.appendChild(window.pin.pinElement);
-    activatedForm(formElement);
-    activatedForm(selectElement);
+    activateForm(formElement);
+    activateForm(selectElement);
     setMainPinPoint();
   };
 
   mainPin.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
-      activatedPage();
+      activatePage();
     }
   });
   mainPin.addEventListener('keydown', function (evt) {
     if (evt.key === 'Enter') {
-      activatedPage();
+      activatePage();
     }
   });
 

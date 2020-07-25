@@ -4,7 +4,8 @@
   var similarCard = document
     .querySelector('#card')
     .content.querySelector('.map__card');
-  var mapFiltersContainer = document.querySelector('.map__filters-container');
+  var cardElement = similarCard.cloneNode(true);
+  var buttonCloseCard = cardElement.querySelector('.popup__close');
 
   var TYPES_HOUSES = {
     palace: 'Дворец',
@@ -47,7 +48,7 @@
   };
 
   var renderCardElement = function (informArrow) {
-    var cardElement = similarCard.cloneNode(true);
+
     cardElement.querySelector('.popup__title').textContent =
       informArrow.offer.title;
     cardElement.querySelector('.popup__text--price').textContent =
@@ -74,8 +75,6 @@
       cardElement.remove();
     };
 
-    var buttonCloseCard = cardElement.querySelector('.popup__close');
-
     buttonCloseCard.addEventListener('mousedown', function (evt) {
       if (evt.button === 0) {
         closeCard();
@@ -91,25 +90,10 @@
 
     return cardElement;
   };
-
-  var renderCards = function () {
-    var card = document.createDocumentFragment();
-    for (var i = 0; i < window.pin.informs.length; i++) {
-      card.appendChild(renderCardElement(window.pin.informs[i]));
-    }
-    return card;
-  };
-
-  // Открытие карточки жилья
-
-  var buttonOpenCard = window.pin.pinElement.querySelectorAll('.map__pin');
-
-  for (var i = 0; i < buttonOpenCard.length; i++) {
-    buttonOpenCard[i].addEventListener('click', function (evt) {
-      evt.currentTarget.classList.add('map__pin--active');
-      var currentPin = document.querySelector('.map__pin--active');
-      window.map.mapElement.insertBefore(renderCards(currentPin), mapFiltersContainer);
-    });
+ 
+  window.card = {
+    cardElement: cardElement,
+    renderCardElement: renderCardElement,
+    buttonCloseCard: buttonCloseCard
   }
-
 })();
