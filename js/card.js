@@ -90,10 +90,11 @@
 
     return cardElement;
   };
- 
+
   window.card = {
     cardElement: cardElement,
     renderCardElement: renderCardElement,
     buttonCloseCard: buttonCloseCard
-  }
+  };
+
 })();
