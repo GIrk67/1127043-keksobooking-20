@@ -74,7 +74,7 @@
           guests: window.main.getRandomArrElement(GUESTS),
           checkin: window.main.getRandomArrElement(CHECKIN_HOURS),
           checkout: window.main.getRandomArrElement(CHECKOUT_HOURS),
-          // description: window.main.getRandomArrElement(DESCRIPTION),
+          description: window.main.getRandomArrElement(DESCRIPTION),
           features: window.main.getRandomArrLength(FEATURES),
           photos: window.main.getRandomArrLength(PHOTOS),
         },
