@@ -66,7 +66,6 @@
         },
         offer: {
           title: window.main.getRandomArrElement(TITLES),
-          // address: window.main.getRandomArrElement(ADDRESSES),
           price: window.main.getRandomArrElement(PRICES),
           type: window.main.getRandomArrElement(TYPES),
           rooms: window.main.getRandomArrElement(ROOMS),
