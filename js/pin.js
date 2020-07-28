@@ -15,7 +15,7 @@
     mapPinElement.style =
       'top: ' +
       informArrow.location.y +
-      'px; left: ' +
+      'px; left: ' + 
       informArrow.location.x +
       'px;';
     mapPinElement.addEventListener('click', function () {
