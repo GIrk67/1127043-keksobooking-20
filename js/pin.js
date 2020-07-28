@@ -12,12 +12,7 @@
     var mapPinElement = similarMapPin.cloneNode(true);
     mapPinElement.querySelector('img').src = informArrow.author.avatar;
     mapPinElement.querySelector('img').alt = informArrow.offer.title;
-    mapPinElement.style =
-      'top: ' +
-      informArrow.location.y +
-      'px; left: ' +
-      informArrow.location.x +
-      'px;';
+    mapPinElement.style = 'top: ' + informArrow.location.y + 'px; left: ' + informArrow.location.x + 'px;';
     mapPinElement.addEventListener('click', function () {
       var currentPin = document.querySelector('.map__pin--active');
 

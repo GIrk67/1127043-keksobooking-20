@@ -32,5 +32,4 @@
     getRandomIntElement: getRandomIntElement,
     getRandomArrLength: getRandomArrLength
   };
-
 })();

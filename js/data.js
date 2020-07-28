@@ -19,7 +19,7 @@
     'Уютное бунгало',
   ];
 
-  // var ADDRESSES = ['600, 350'];
+  var ADDRESSES = ['600, 350'];
 
   var PRICES = [10000, 50000];
 
@@ -66,7 +66,7 @@
         },
         offer: {
           title: window.main.getRandomArrElement(TITLES),
-          // address: window.main.getRandomArrElement(ADDRESSES),
+          address: window.main.getRandomArrElement(ADDRESSES),
           price: window.main.getRandomArrElement(PRICES),
           type: window.main.getRandomArrElement(TYPES),
           rooms: window.main.getRandomArrElement(ROOMS),
