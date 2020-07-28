@@ -19,7 +19,7 @@
     'Уютное бунгало',
   ];
 
-  // var ADDRESSES = [];
+  // var ADDRESSES = ['600, 350'];
 
   var PRICES = [10000, 50000];
 
@@ -48,6 +48,13 @@
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
   ];
 
+  var DESCRIPTION = [
+    'Апартаменты с бесплатным Wi-Fi расположены в Токио. К услугам гостей терраса',
+    'К услугам гостей просторная квартира с прекрасным видом',
+    'Современный дом с кондиционером и балконом. Из окон открывается вид на город',
+    'К услугам гостей бунгало бесплатная частная парковка. Можно взять напрокат автомобиль',
+  ];
+
   // Создание массива объектов
 
   var getInformArrows = function (number) {
@@ -59,12 +66,14 @@
         },
         offer: {
           title: window.main.getRandomArrElement(TITLES),
+          // address: window.main.getRandomArrElement(ADDRESSES),
           price: window.main.getRandomArrElement(PRICES),
           type: window.main.getRandomArrElement(TYPES),
           rooms: window.main.getRandomArrElement(ROOMS),
           guests: window.main.getRandomArrElement(GUESTS),
           checkin: window.main.getRandomArrElement(CHECKIN_HOURS),
           checkout: window.main.getRandomArrElement(CHECKOUT_HOURS),
+          description: window.main.getRandomArrElement(DESCRIPTION),
           features: window.main.getRandomArrLength(FEATURES),
           photos: window.main.getRandomArrLength(PHOTOS),
         },

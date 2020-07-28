@@ -51,6 +51,8 @@
 
     cardElement.querySelector('.popup__title').textContent =
       informArrow.offer.title;
+    // cardElement.querySelector('.popup__text--address').textContent = informArrow.offer.address;
+    cardElement.querySelector('.popup__description').textContent = informArrow.offer.description;
     cardElement.querySelector('.popup__text--price').textContent =
       informArrow.offer.price + ' ₽/ночь';
     cardElement.querySelector('.popup__type').textContent =
